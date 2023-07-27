@@ -716,6 +716,14 @@ export class EntityManager {
                 ),
         )
 
+        if (overwriteColumns.length) {
+            const updateDateCol = metadata.columns.find((col) => col.isUpdateDate);
+
+            if (updateDateCol) {
+                overwriteColumns.push(updateDateCol);
+            }
+        }
+
         return this.createQueryBuilder()
             .insert()
             .into(target)
